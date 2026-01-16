@@ -19,7 +19,7 @@ public class MyprinterApplication {
 
     @GetMapping("/hello")
     public String hello(){
-		return"Hello world SpringBoot Printer 222!";
+		return"Hello world SpringBoot Printer 555!";
 	}
     
 
