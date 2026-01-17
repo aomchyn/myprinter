@@ -20,6 +20,7 @@ public class JwtInterceptor implements HandlerInterceptor{
         HttpServletRequest request,
         HttpServletResponse response, Object handler)
         throws Exception{
+
             if (request.getMethod().equals("OPTIONS")){
                 return true;
             }
@@ -38,13 +39,13 @@ public class JwtInterceptor implements HandlerInterceptor{
 
         String token = request.getHeader("Authorization");
 
-        if (token == null || !token.startsWith("Bearer")){
+        if (token == null || !token.startsWith("Bearer ")){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
 
         try {
-            String tokenWithOutBearer = token.replace("Bearer", "");
+            String tokenWithOutBearer = token.replace("Bearer ", "").trim();
             JWT.require(Algorithm.HMAC256(WebConfig.getSecret()))
             .build()
             .verify(tokenWithOutBearer);
